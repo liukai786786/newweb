@@ -1,0 +1,91 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="Cache-Control" content="no-store" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%
+String path = request.getContextPath();
+String pathPrefix = request.getScheme()+"://"+request.getServerName();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+String tokenID = request.getParameter("tokenID");
+
+String menuName = null;
+try{
+	menuName = request.getParameter("menuName");
+}catch(Exception e){}
+//读取配置
+String systemStyle = "default";
+String systemTitle = "土地出让金管理系统";
+String fileServerPort = "";
+
+String userGuid = "";
+%>
+<base href="<%=basePath%>" > 
+
+<!-- 龙图的JS -->  
+<script type="text/javascript" src="getScript.do?url=static/ext.lt/js/frameworksupport.gzjs&version=1"></script>  
+<script type="text/javascript" src="getScript.do?url=static/ext.lt/js/ltext_core.gzjs&version=1"></script> 
+<script type="text/javascript" src="getScript.do?url=static/ext.lt/js/datatable3.0.gzjs&version=1"></script> 
+<script type="text/javascript" src="getScript.do?url=static/ext.lt/js/editdatatable.gzjs&version=1"></script>  
+<script type="text/javascript" src="getScript.do?url=static/ext.lt/js/formulasdatatable.gzjs&version=1"></script>                
+
+<!--添加jquery --> 
+<script type="text/javascript" src="getScript.do?url=static/jquery/jquery-1.9.0.min.gzjs&version=1"></script> 
+
+<!--    
+<script type="text/javascript" src="static/jquery/jquery-1.9.0.min.js"></script>  
+-->
+<script type="text/javascript"> 
+var basePath = "<%=basePath%>";
+var pathPrefix = "<%=pathPrefix%>";
+var systemStyle = "<%=systemStyle%>";
+var fileServerPort = "<%=fileServerPort%>";
+var systemTitle = "<%=systemTitle%>";
+var skinConfig={
+    style: "<%=systemStyle%>"
+
+}; 
+var tokenID =  "<%=tokenID %>";
+var tokenParam = "tokenID=<%=tokenID %>";
+var finYear ='2018';
+function setTokenID(e) {
+	
+	var url = e.url;
+	if (e.dataType != null && e.dataType.toLowerCase() == 'script') {
+		return e;
+	}
+	if (url.indexOf("?") == -1) {
+		url = url + "?" + tokenParam;
+	} else if (url.indexOf("tokenID") == -1) {
+		url = url + "&" + tokenParam;
+	}
+	e.url = appendUrlParam(url,e);
+	return e;
+}
+
+function appendUrlParam(url) {
+	return url;
+}
+
+String.prototype.Trim = function(){  
+   return this.replace(/(^\s*)|(\s*$)/g, "");  
+}
+
+ /**
+  Hq.modules.version={
+  "static/ext.lt/js/editpanel.js":"1",
+  "static/json/json2.js":"3"  
+  }; 
+  */ 
+  // Hq.modules.version="2" 
+  
+ </script> 
+<script type='text/javascript' src='getScript.do?url=static/pub2.0/js/Hq2.gzjs&version=12'></script>
+<script type="text/javascript">
+Hq.require([ "all_" ]);
+</script>
+</head>

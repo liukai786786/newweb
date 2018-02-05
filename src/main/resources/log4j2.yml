@@ -1,0 +1,96 @@
+Configuration:
+  status: WARN
+  name: LOG4J2Config
+  properties:
+    property:
+    - name: log_pattern
+      value: "%d{yyyy-MM-dd HH:mm:ss},%-5level [%c] line%L,%msg%n"
+    - name: basePath
+      value:  newweb_act/logs
+    - name: info-msg
+      value:  ${basePath}/info.log
+    - name: rollingfile_info-msg
+      value:  ${basePath}/info%d{yyyy-MM-dd}.log
+    - name: debug-msg
+      value:  ${basePath}/debug.log
+    - name: rollingfile_debug-msg
+      value:  ${basePath}/debug%d{yyyy-MM-dd}.log
+  appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      ThresholdFilter:
+        level: trace
+        onMatch: ACCEPT
+        onMismatch: DENY
+      PatternLayout:
+        Pattern: ${log_pattern}
+    RollingFile:
+    - name: rollingfile_info-msg
+      ignoreExceptions: true
+      fileName: ${info-msg}
+      filePattern: ${rollingfile_info-msg}
+      append: true
+      Filters:
+        - ThresholdFilter:
+            level: info
+            onMatch: ACCEPT
+            onMismatch: DENY
+        - ThresholdFilter:
+            level: warn
+            onMatch: DENY
+            onMismatch: NEUTRAL
+      PatternLayout:
+        Pattern: "%d{yyyy-MM-dd HH:mm:ss},%-5level,%msg%n"
+      Policies:
+        TimeBasedTriggeringPolicy:
+          modulate: true
+          interval: 1
+        SizeBasedTriggeringPolicy:
+          size: 100 MB
+      DefaultRolloverStrategy:
+        max: 10
+    - name: rollingfile_debug-msg
+      ignoreExceptions: false
+      filename: ${debug-msg}
+      filePattern: ${rollingfile_debug-msg}
+      append: true
+      Filters:
+        - ThresholdFilter:
+            level: info
+            onMatch: DENY
+            onMismatch: NEUTRAL
+        - ThresholdFilter:
+            level: debug
+            onMatch: ACCEPT
+            onMismatch: DENY
+      PatternLayout:
+        Pattern: "%d{yyyy-MM-dd HH:mm:ss},%-5level [%c] line%L,%msg%n"
+      Policies:
+        TimeBasedTriggeringPolicy:
+          modulate: true
+          interval: 1
+        SizeBasedTriggeringPolicy:
+          size: 100 MB
+      DefaultRolloverStrategy:
+        max: 10
+  Loggers:
+    Root:
+      level: error
+      AppenderRef:
+       - ref: Console
+       - ref: rollingfile_debug-msg
+    logger:
+      - name: org.springframework.web
+        level: debug
+        additivity: false
+        AppenderRef:
+         - ref: Console
+         - ref: rollingfile_debug-msg
+      - name: com.tjhq
+        level: debug
+        additivity: false
+        AppenderRef:
+         - ref: Console
+         - ref: rollingfile_debug-msg
+         - ref: rollingfile_info-msg

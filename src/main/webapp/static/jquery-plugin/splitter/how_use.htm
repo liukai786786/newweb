@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <meta http-equiv="content-type" content="text/html; charset=gbk">
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+<!--code display lib and style-->
+<link href="../code_1.css" rel="stylesheet" media="screen" /> 
+<link href="../code_2.css" rel="stylesheet" media="screen" /> 
+<script type="text/javascript" src="../code.js"></script></HEAD>
+ 
+<style> 
+p{font-size:10pt;letter-spacing:3;line-height:1;font-weight:bold;color:darkblue;}
+body{font-size:9pt;line-height:1.5}
+.head{
+    background-color:buttonface;
+	height:23px;
+}
+.codearea{
+  background-color:lightyellow;
+}
+</style>
+ 
+<SCRIPT LANGUAGE="JavaScript"> 
+<!--
+//设置示例代码显示效果
+SyntaxHighlighter.config.clipboardSwf = '../clipboard.swf';
+SyntaxHighlighter.all();
+function window_onload(){
+    //divCode_1.style.width = document.body.offsetWidth-23;
+}
+//-->
+</SCRIPT>
+ 
+<BODY onload="window_onload()" scroll=no>
+<P>一、使用方法：</P>
+<P>1）、首先引入相关js文件和样式库文件<font color=red>(切勿重复引入)</font></P>
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+&lt;link type="text/css" rel="stylesheet" href="jqwidgets/styles/jqx.base.css" /&gt;
+ 
+&lt;script type="text/javascript" src="scripts/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jqwidgets/jqxcore.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jqwidgets/jqxsplitter.js"&gt;&lt;/script&gt;
+ 
+</pre></div></div>
+<P>2）、接着定义DIV布局</P>
+示例代码是典型的上北下南两帧的典型界面的布局。
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+ 
+	<div id='jqxWidget'>
+        <div id="mainSplitter">
+            <div class="splitter-panel" style="overflow:auto">Panel 1</div>
+            <div class="splitter-panel">Panel 2</div>
+        </div>
+    </div>
+ 
+</pre></div></div>
+<P>3）、最后定义$(document).onready()方法(<I><FONT COLOR="orange">DOM结构绘制完毕后就执行</FONT></I>)，示例代码如下：</P>
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+ $(document).ready(function () {
+     var theme = "";
+     $('#mainSplitter').jqxSplitter({ width: 600, height: 400, orientation: 'horizontal', theme: theme, panels: [{ size: 100 }, { size: 300}] });
+});
+</pre></div></div>
+ 
+<P>二、主要方法及参数说明：</P>
+<p>2.1  resizable  </p>
+设置是否允许改变大小属性。当改属性设置为false时，用户将不允许移动分割条。<br>
+示例代码：
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+//设置 resizable 属性.
+$('#jqxSplitter').jqxSplitter({ resizable: false });
+//获取 resizable 属性.
+var resizable = $('#jqxSplitter').jqxSplitter('resizable');
+</pre></div></div>
+<p>2.2  splitBarSize  </p>
+设置或获取分割条大小.<br>
+示例代码：
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+//设置 splitBarSize 属性.
+$('#jqxSplitter').jqxSplitter({ splitBarSize: 15 });
+//获取 splitBarSize 属性.
+var splitBarSize = $('#jqxSplitter').jqxSplitter('splitBarSize');	
+</pre></div></div>
+ 
+<p>2.3 showSplitBar</p>
+设置或获取分割条是否显示。<br>
+示例代码：
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+//设置 showSplitBar 属性.
+$('#jqxSplitter').jqxSplitter({ showSplitBar: false });
+//获取 showSplitBar 属性.
+var showSplitBar = $('#jqxSplitter').jqxSplitter('showSplitBar');	
+</pre></div></div>
+ 
+<p>2.4 orientation</p>
+设置 或 获取 "方向"属性.<br>
+示例代码：
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+//Set the orientation property.
+$('#jqxSplitter').jqxSplitter({ width: 600, height: 480, orientation: 'horizontal', panels: [{ size: 300 }, { size: 300}] });
+//Get the orientation property.
+var orientation = $('#jqxSplitter').jqxSplitter('orientation');	
+</pre></div></div>
+ 
+<p>2.5 panels</p>
+设置或获取 “面板” 属性。<br>
+示例代码：
+<div class="CodeEntity">
+<div  class='code_pieces code_module'>
+<pre class="brush: js; auto-links: false;">
+每个面板都代表着有以下属性域的对象：
+ 
+size - 设置面板大小.
+min - 设置面板最小尺寸.
+collapsible - 设置该面板是否可折叠的.
+collapsed - 设置该面板是否折叠.
+	
+</pre></div></div>
+ 
+<P>三、示例</P>
+<P>1）、示例一，典型布局，框架效果如下，<a target="_blank" href="layout_sample_1.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR>
+	<TD colspan=2 bgcolor=purple>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD rowspan=2 width=100 bgcolor=green>&nbsp;</TD>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD bgcolor=orange>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>2）、示例二，典型布局，框架效果如下，<a target="_blank" href="layout_sample_2.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=30>
+	<TD colspan=2 bgcolor=purple>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD width=100 bgcolor=green>&nbsp;</TD>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+<TR>
+	<TD colspan=3 bgcolor=orange>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>3）、示例三，典型布局，框架效果如下，<a target="_blank" href="layout_sample_3.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=30>
+	<TD colspan=2 bgcolor=purple>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD width=100 bgcolor=green>&nbsp;</TD>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>4）、示例四，内嵌布局，框架效果如下，<a target="_blank" href="layout_sample_4.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=30>
+	<TD width=100 bgcolor=green>&nbsp;</TD>
+	<TD bgcolor=indigo>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD bgcolor=lightblue >&nbsp;</TD>
+	<TD bgcolor=orange>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>5）、示例五(1)，左右布局，框架效果如下，<a target="_blank" href="layout_sample_5.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=50>
+	<TD width=100 bgcolor=purple>&nbsp;</TD>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>5）、示例五(2)，左右布局（全屏），框架效果如下，<a target="_blank" href="demos/jqxsplitter/jquery-splitter-fit-to-window.htm">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=50>
+	<TD width=100 bgcolor=purple>&nbsp;</TD>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+<P>6）、示例六，上下布局，框架效果如下，<a target="_blank" href="layout_sample_6.html">运行代码</a></P>
+ 
+<TABLE width=380  bordercolorlight="blue" bordercolordark="silver" style="border-collapse:collapse;border-bottom:1px solid">
+<TR height=30>
+	<TD bgcolor=purple>&nbsp;</TD>
+</TR>
+<TR height=30>
+	<TD bgcolor=lightblue>&nbsp;</TD>
+</TR>
+</TABLE>
+ 
+</BODY>
+</HTML>
+

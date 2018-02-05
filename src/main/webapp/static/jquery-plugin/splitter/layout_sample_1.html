@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demonstration shows how to trigger the jqxSplitter events.
+    </title>
+    <link rel="stylesheet" href="splitter.css" type="text/css" />
+    <script type="text/javascript" src="../../jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="jqxcore.js"></script>
+    <script type="text/javascript" src="jqxsplitter.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mainSplitter').jqxSplitter({width:'800',height:'600', orientation:"horizontal", panels: [{ size: 80 }] });
+			$('#middleSplitter').jqxSplitter({width:'100%',orientation: 'vertical', panels: [{ size: 100 }] });
+            $('#rightSplitter').jqxSplitter({ width:'100%',orientation: 'horizontal', panels: [{ size: '80%'}] });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="mainSplitter">
+        <div> top frame </div>
+        <div>
+            <div id="middleSplitter">
+				<div>left frame</div>
+				<div>
+					<div id="rightSplitter">
+						<div>
+							Top-Right Panel</div>
+						<div>
+							Bottom-Right Panel</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</body>
+</html>
